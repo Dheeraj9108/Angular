@@ -1,0 +1,33 @@
+{
+  "name": "dheeraj-project-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/dheeraj-project-e2e/src",
+  "targets": {
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/dheeraj-project-e2e/cypress.config.ts",
+        "testingType": "e2e",
+        "devServerTarget": "dheeraj-project:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "dheeraj-project:serve:production"
+        },
+        "ci": {
+          "devServerTarget": "dheeraj-project:serve-static"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/dheeraj-project-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["dheeraj-project"]
+}
